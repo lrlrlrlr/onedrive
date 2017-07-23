@@ -3,6 +3,7 @@
 import re
 from chrome_driver import ChromeDriver
 from sms_platform_api import Ailezan
+from multiprocessing import Pool
 
 '2017年7月13日17:39:06:重构Onedrive'
 
@@ -22,6 +23,7 @@ class OnedriveProj():
 
         # 申请手机号码
         self.get_phonenumber()
+        # todo 如果这里没获取到咋整？
         # 打开浏览器请求验证码
 
         self.send_verificationcode()
@@ -56,4 +58,12 @@ class OnedriveProj():
 
 
 if __name__ == '__main__':
-    t = OnedriveProj()
+    import time
+    p = Pool(1)
+
+    for i in range(10):
+        time.sleep(2)
+        p.apply_async(OnedriveProj, args=())#多进程运行函数
+    print('waiting for all process done...')
+    p.close()
+    p.join()

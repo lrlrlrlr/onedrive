@@ -7,7 +7,8 @@ class Ailezan():
     url = 'http://api.hellotrue.com/api/do.php?'
 
     def __init__(self):
-        self.login()
+        # self.login()
+        self.token='ba659b48-ce56-4577-9f49-4db003742adb'
 
     def login(self, uid='api-c777w00r', psw='209209'):
         '''170723进行了重构'''
@@ -36,7 +37,7 @@ class Ailezan():
                     else:
                         if str(self.login_status) == '1':
                             print('登录成功!')
-                            return (self.login_status, self.token)
+                            return (self.token)
                         else:
                             print('登录失败!登录情况:', self.r.text)
                 else:
@@ -54,9 +55,11 @@ class Ailezan():
         try:
             self.r = requests.get(self.url)
             if self.r.status_code==200:
-                mobilenumber_status, mobilenumber = self.r.text.split('|')
+                mobilenumber_status, self.mobilenumber = self.r.text.split('|')
                 if mobilenumber_status=='1':
-                    return mobilenumber
+                    print(self.mobilenumber)
+                    return self.mobilenumber
+
                 else:
                     print('mobilenumber_status出错',self.r.text)
         except:
@@ -113,4 +116,3 @@ class Ailezan():
 
 if __name__ == '__main__':
     a = Ailezan()
-    a.add_ignore_list('5502','17164357794')

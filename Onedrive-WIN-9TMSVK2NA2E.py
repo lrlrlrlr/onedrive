@@ -147,7 +147,7 @@ def main_Caoma():
     CM.getUserInfos(uid,token)
 
     # 拿号码
-    mobilenum,token=CM.getMobilenum(pid,uid,token).split('|')
+    mobilenum,token=CM.get_mobilenumber(pid, uid, token).split('|')
 
     # 收验证码
     sms_result=CM.getVcodeAndReleaseMobile(pid,uid,token,mobilenum)
@@ -183,7 +183,7 @@ def main_Ailezan(url,次数,proxy_status='on'):
             c=webdriver.Chrome(executable_path=r'D:\DDL DATA\OneDrive\tools\chromedriver.exe',
                                chrome_options=chrome_options)
             #拿号码
-            getmobilenum_status,mobile=Alz.getMobilenum(pid,token).split('|')
+            getmobilenum_status,mobile=Alz.get_mobilenumber(pid, token).split('|')
 
             if getmobilenum_status=='1':
                 #拿到号码了,请求验证码
