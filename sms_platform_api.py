@@ -68,22 +68,25 @@ class Ailezan():
 
     def receive_verificationcode(self, pid, mobile):
         '''170723进行了重构'''
-        print('获取验证码：', end='')
+        # print('获取验证码：', end='')
         self.url = Ailezan.url + \
             'action=getMessage&sid={}&phone={}&token={}'.format(pid, mobile, self.token)
+        # print(self.url)
         try:
             self.r = requests.get(self.url)
             if self.r.status_code == 200:
-                print(self.r.text)
+                # print(self.r.text)
                 verifycode_status, verifycode = self.r.text.split('|')
                 if verifycode_status == '1':
                     return verifycode
                 else:
-                    print('接码平台返回状态出错！',self.r.text)
+                    pass
+                    # print('接码平台返回状态出错！',self.r.text)
             else:
                 print('status_code error!', self.r.status_code)
         except BaseException:
-            print('没有接收到验证码!',self.r.text)
+            # print('没有接收到验证码!',self.r.text)
+            raise '没有接收到验证码!'
             pass
 
     def add_ignore_list(self, pid,  mobile):  # 这里可以批量加黑,用','分隔开即可! 因暂不需要 没做这个功能!
